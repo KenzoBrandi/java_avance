@@ -1,0 +1,58 @@
+@startuml cards
+    interface Comparable<T>{
+        + CompareTo(comparedObject : T) : int
+    }
+    enum Color implements Comparable{
+        SPADE
+        HEART
+        DIAMOND
+        CLUB 
+        + CompareTo(comparedObject : T) : int
+    }
+    enum Value implements Comparable{
+        SEVEN
+        EIGHT
+        NINE
+        TEN 
+        JACK
+        QUEEN
+        KING
+        ACE
+        + CompareTo(comparedObject : T) : int
+    }
+    class Card implements Comparable{
+        - value : Value
+        - color : Color
+        + getValue() : value
+        + getColor() : Color 
+        + CompareTo(comparedObject : T) : int
+    }
+    class Hand {
+        - cards : ArrayList<Card>
+        + size() : int
+        + insert(card : Card) : void
+        + remove(number : int) : void
+    }
+    abstract class Game{
+        + players : ArrayList<Hand>
+        + {abstract} play() : void 
+        + winner() : Hand
+
+    }
+    Card "1" -- "1" Value : has
+    Card "1" -- "1" Color : has
+    Hand "1" o-- "0..*" Card : contains
+    Game ..> Hand
+    class War extends Game{
+        + play() : void
+        + winner() : Hand
+    }
+    class HighOrLow extends Game{
+        + play() : void
+        + winner() : Hand
+    }
+    class BlackJack extends Game{
+        + play() : void
+        + winner() : Hand
+    }
+@enduml

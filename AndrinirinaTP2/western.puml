@@ -1,0 +1,91 @@
+@startuml western
+scale 2
+
+class Human {
+    - name : String
+    - drink : String
+    - wallet : int
+    + Human(name : String)
+    + getName() : String
+    + speak(message : String) : void
+    + selfIntroduction() : void
+    + drink(barman : Barman) : void
+}
+
+class Cowboy extends Human {
+    - notoriety : int 
+    - quality : String 
+    - captured : ArrayList<Outlaw>
+    + Cowboy(name : String)
+    + shoot(outlaw : Outlaw) : void 
+    + getNotoriety() : int
+    + incrementNotoriety() : void
+    + capture(outlaw : Outlaw) : void
+    + handOver(sheriff : Sheriff) : void
+} 
+
+class Sheriff extends Cowboy {
+    - ruffiansJailed : int 
+    + Sheriff(name : String)
+    + searchForRuffian(outlaw : Outlaw) : void
+    + arrest(outlaw : Outlaw) : void  
+}
+
+class Lady extends Human {
+    - dressColor : String
+    - captive : boolean 
+    + Lady(name : String, dressColor : String)
+    + changeDress(newColor : String) : void
+    + getKidnapped() : void
+    + getReleased() : void   
+}
+
+class Barman extends Human {
+    - barName : String 
+    + Barman(name : String)
+    + Barman(name : String, barName : String)
+}
+
+interface Outlaw {
+    + getLook() : void
+    + kidnap(lady : Lady) : void 
+    + getWantedReward() : int 
+    + getCaught(cowboy : Cowboy) : void  
+    + getName() : String 
+}
+
+class Ruffian extends Human implements Outlaw {
+    - look : String 
+    - numberOfKidnappedLadies : int 
+    - kidnappedLadies : ArrayList<Lady>
+    - bounty : int
+    - jailed : boolean 
+    + Ruffian(name : String)
+    + getNumberOfKidnappedLadies() : int
+    + sentToJail() : void
+}
+
+Human ..> Barman
+Outlaw ..> Lady
+Outlaw ..> Cowboy
+Cowboy ..> Sheriff
+Cowboy ..> Outlaw
+Sheriff ..> Outlaw
+
+class RuffianLady extends Lady implements Outlaw {
+    - kidnappedLadies : ArrayList<Lady> 
+    - bounty : int 
+    - jailed : boolean
+    + RuffianLady(name : String, dressColor : String)
+    + sentToJail() : void
+}
+
+class Ripou extends Sheriff implements Outlaw {
+    - kidnappedLadies : ArrayList<Lady> 
+    - bounty : int 
+    - jailed : boolean
+    + Ripou(name : String)
+    + sentToJail() : void
+}
+
+@enduml

@@ -1,0 +1,69 @@
+@startuml model
+scale 4
+
+' Models
+interface Entity{
+    + {abstract} getName() : String
+}
+class Class{
+    - name : String
+    - documentation : String
+    - superClass : Class
+    + isConcrete() : bool
+    + getName() : String
+}
+class Attribute{
+    - name : String
+    - documentation : String
+    - type : String
+    + getName() : String
+}
+class Method{
+    - name : String
+    - documentation : String
+    - type : String
+    + isConcrete() : bool
+    + isConstructor() : bool
+    + getName() : String
+}
+class Parameter{
+    - name : String
+    - type : String
+}
+
+class ConcreteMethod{
+    - body : String[]
+    + isConcrete() : bool
+}
+class Constructor{
+    + isConstructor() : bool
+}
+Class Interface{
+    - name : String
+    - documentation : String
+    - superInterface : Interface
+    - methods : Method[]
+    + isConcrete() : bool
+    + getName() : String
+}
+Class Enum{
+    - values : Const[]
+    - superClass : Class = null
+    - methods : Method[]
+    - attributes : Attribute[]
+    + isConcrete() : bool
+}
+Entity <|.d. Class
+Entity <|.l. Method
+Entity <|.r. Attribute
+Entity <|.r. Parameter
+Entity <|.r. Interface
+Entity <|.r. Enum
+Class *- Method
+Class *- Attribute
+Interface *- Method
+Method *-l- Parameter
+Method <|-- ConcreteMethod
+ConcreteMethod <|-- Constructor
+Class <|-- Enum
+@enduml
