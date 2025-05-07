@@ -1,6 +1,11 @@
 {
     "java.project.referencedLibraries": [
-        "lib/**/*.jar",
+        "h:\\inf1405\\AndrinirinaTP5\\tp5\\lib\\junit-platform-console-standalone-1.12.0.jar",
         "tp5/lib/junit-platform-console-standalone-1.12.0.jar"
-    ]
+    ],
+    "java.project.sourcePaths": [
+        "tp5\\src\\main",
+        "tp5\\src\\test"
+    ],
+    "java.project.outputPath": "tp5\\bin"
 }

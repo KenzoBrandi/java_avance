@@ -1,0 +1,26 @@
+@startuml exam
+abstract class Human{
+    - name : String
+    {abstract} + getName() : String
+}
+class Asian{
+    - name : String
+    + getName(): String
+}
+class African{
+    - name : String
+    + getName(): String
+}
+interface Namable{
+    + getName() : String
+}
+abstract class Groupe{
+    - people : List<Human>
+}
+abstract class Environment
+Human <|-- Asian
+Human <|-- African
+Human ..|>Namable
+Human ..> Environment : <<use>>
+Groupe "0..1" o-r- "0..*" Human : contains >
+@enduml

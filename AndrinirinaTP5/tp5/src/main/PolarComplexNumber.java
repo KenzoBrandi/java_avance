@@ -4,7 +4,8 @@ public class PolarComplexNumber implements ComplexNumber{
 
     public PolarComplexNumber(double r,double theta){
         modulus = r;
-        argument = theta;
+        //assurer que theta appartienne à [0;2PI[
+        argument = NormalizeTheta.normalize(theta);
     }
     //accesseurs
     public double getReal(){
@@ -23,15 +24,19 @@ public class PolarComplexNumber implements ComplexNumber{
     //modificateurs
     public void setCartesian(double x,double y){
         modulus = Math.sqrt(Math.pow(x,2)+Math.pow(y, 2));
-        if (x>=0) {
-            argument = Math.asin(y / getModulus());
-        } else {
-            argument = Math.PI - Math.asin(y / getModulus());
+        argument = 0.0;
+        if (x>=0 && modulus !=0) {
+            argument = Math.asin(y / modulus);
+        } else if(x<0) {
+            argument = Math.PI - Math.asin(y / modulus);
         }
+        //assurer que l'argument appartienne à [0;2PI[
+        argument = NormalizeTheta.normalize(argument);
     };
     public void setPolar(double r,double theta){
         modulus = r;
-        argument = theta;
+        //assurer que theta appartienne à [0;2PI[
+        argument = NormalizeTheta.normalize(theta);
     };
 
     //opérations de calcul
@@ -51,8 +56,7 @@ public class PolarComplexNumber implements ComplexNumber{
         return newComplex;
     };
     public ComplexNumber conjugate(){
-        PolarComplexNumber newComplex = new PolarComplexNumber(0,0);
-        newComplex.setPolar(modulus, -argument);;
+        PolarComplexNumber newComplex = new PolarComplexNumber(modulus, -argument);
         return newComplex;
     };
 

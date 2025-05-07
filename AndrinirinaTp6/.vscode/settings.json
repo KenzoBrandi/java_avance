@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": [
+        "ComplexNumberGUI\\src\\main"
+    ],
+    "java.project.referencedLibraries": [],
+    "java.project.outputPath": "ComplexNumberGUI\\bin"
+}

@@ -17,10 +17,15 @@ public class CartesianComplexNumber implements ComplexNumber{
         return Math.sqrt(Math.pow(real,2)+Math.pow(imaginary, 2));
     };
     public double getArgument(){
-        if (real>=0) {
-            return Math.asin(imaginary / getModulus());
+        double theta = 0.0;
+        if (real>=0 && getModulus() != 0.0 ) {
+            theta = Math.asin(imaginary / getModulus());
+        } else if (real < 0) {
+            theta = Math.PI - Math.asin(imaginary / getModulus());
         }
-        return Math.PI - Math.asin(imaginary / getModulus());
+        //assurer que theta appartienne à [0;2PI[
+        theta = NormalizeTheta.normalize(theta);
+        return theta;
     };
 
     //modificateurs

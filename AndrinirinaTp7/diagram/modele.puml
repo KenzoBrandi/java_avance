@@ -1,0 +1,27 @@
+@startuml modele
+    package modele{
+        interface Observer{
+            + update(context)
+        }
+        interface Subject{
+            + subscribe(observer)
+            + unsubscribe(observer)
+            + notifyObservers(context)
+        }
+
+        class GameOfLifeModel{
+            - grid : int[][]
+            + GameOfLifeModel(nbRows : int, nbColumns : int)
+            + getCellValue(row : int, column :int) : int
+            + makeCellAlive(row : int, column :int) : void
+            + killCell(row : int, column :int) : void
+            + nextIteration(): void
+            + subscribe(observer)
+            + unsubscribe(observer)
+            + notifyObservers(context)
+        }
+        GameOfLifeModel .l.|> Subject
+        Subject --> Observer
+        Subject o-- Observer
+    }
+@enduml
